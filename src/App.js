@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: "" , company : "" };
+    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangeCompany = this.handleChangeCompany.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  
+  handleChangeName(event) {
+    this.setState({ name: event.target.value });
+  }
+  handleChangeCompany(event) {
+    this.setState ({company : event.target.value})
+  }
+  handleSubmit(event) {
+    alert(" Name: " + this.state.name + " \n Company: " + this.state.company);
+    event.preventDefault();
+  }
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <h1>Controlled Form Example</h1>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={this.state.name}
+            onChange={this.handleChangeName}
+          />
+        </label><br/>
+        <label>
+          Company Name:
+          <input
+            type="text"
+            value={this.state.company}
+            onChange={this.handleChangeCompany}
+          />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
 }
-
 export default App;
